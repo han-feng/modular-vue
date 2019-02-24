@@ -1,0 +1,31 @@
+{
+  "name": "modular-vue",
+  "version": "0.0.1",
+  "description": "modular vue support",
+  "main": "./dist/index.js",
+  "author": "Han Feng <han_feng@foxmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/han-feng/modular-vue.git"
+  },
+  "scripts": {
+    "build": "babel src --out-dir dist",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "modular-core": "^0.2.1",
+    "vue": "^2.6.7",
+    "vue-router": "^3.0.2",
+    "vuex": "^3.1.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.3"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}
