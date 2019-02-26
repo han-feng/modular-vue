@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import vuexAlong from './vuex-along'
+// import setting from '@/setting'
 
 // 初始化 Vuex
 Vue.use(Vuex)

@@ -1,8 +1,8 @@
 {
   "name": "modular-vue",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "modular vue support",
-  "main": "./dist/index.js",
+  "main": "./dist/module.config.js",
   "author": "Han Feng <han_feng@foxmail.com>",
   "license": "MIT",
   "repository": {
@@ -11,22 +11,17 @@
   },
   "scripts": {
     "build": "babel src --out-dir dist",
+    "prebuild": "rimraf dist/*",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "modular-core": "^0.3.0",
-    "nprogress": "^0.2.0",
     "vue": "^2.6.7",
     "vue-router": "^3.0.2",
     "vuex": "^3.1.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.3.3"
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ]
+    "@babel/core": "^7.3.4",
+    "rimraf": "^2.6.3"
+  }
 }
