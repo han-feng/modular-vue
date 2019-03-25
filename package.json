@@ -1,6 +1,6 @@
 {
   "name": "modular-vue",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "modular vue support",
   "author": "Han Feng <han_feng@foxmail.com>",
   "license": "MIT",
@@ -15,7 +15,8 @@
   "scripts": {
     "build": "babel src --out-dir dist",
     "lint": "eslint *.js",
-    "prebuild": "rimraf dist/*"
+    "prebuild": "rimraf dist/*",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "vue": "^2.6.10",

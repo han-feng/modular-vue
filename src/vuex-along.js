@@ -1,5 +1,3 @@
-import m from './module.config'
-
 let unll, ll, sl, unsl
 let onlySession = false
 const LOCALSTORAGE = 0
