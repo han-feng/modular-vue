@@ -1,16 +1,12 @@
 {
   "name": "modular-vue",
-  "version": "0.4.0-alpha-0",
+  "version": "0.5.1",
   "description": "modular vue support",
   "author": "Han Feng <han_feng@foxmail.com>",
   "license": "MIT",
-  "main": "dist/module.config.js",
+  "main": "dist/index.js",
   "files": [
-    "dist/activator.js",
-    "dist/module.config.js",
-    "dist/router.js",
-    "dist/store.js",
-    "dist/vuex-along.js"
+    "dist"
   ],
   "repository": {
     "type": "git",
@@ -18,7 +14,8 @@
   },
   "scripts": {
     "build": "babel src --out-dir dist",
-    "lint": "eslint *.js"
+    "lint": "eslint *.js",
+    "prebuild": "rimraf dist/*"
   },
   "dependencies": {
     "vue": "^2.6.10",
@@ -33,7 +30,8 @@
     "acorn": "^6.1.1",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.15.3",
-    "eslint-plugin-vue": "^5.2.2"
+    "eslint-plugin-vue": "^5.2.2",
+    "rimraf": "^2.6.3"
   },
   "browserslist": [
     "> 1%",
