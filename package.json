@@ -1,6 +1,6 @@
 {
   "name": "modular-vue",
-  "version": "0.3.1",
+  "version": "0.5.0",
   "description": "modular vue support",
   "author": "Han Feng <han_feng@foxmail.com>",
   "license": "MIT",
@@ -20,14 +20,14 @@
     "lint": "eslint *.js"
   },
   "dependencies": {
-    "vue": "^2.6.7",
+    "vue": "^2.6.10",
     "vue-router": "^3.0.2",
     "vuex": "^3.1.0"
   },
   "devDependencies": {
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.14.1",
+    "eslint": "^5.15.3",
     "eslint-plugin-vue": "^5.2.2"
   },
   "eslintConfig": {
