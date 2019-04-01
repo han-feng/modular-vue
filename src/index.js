@@ -11,16 +11,22 @@ export default {
   name: 'vue',
   extensionPoints: {
     'vue.app': {
+      type: 'mixin'
     },
-    'vue.plugin': {
+    'vue.plugins': {
+      type: 'array'
     },
     'vue.options': {
+      type: 'array'
     },
-    'vue.router.addRoutes': {
+    'vue.router.routes': {
+      type: 'array'
     },
-    'vue.router.event': {
+    'vue.router.hooks': {
+      type: 'array' // or mixin ?
     },
-    'vuex.module': {
+    'vuex.modules': {
+      type: 'array'
     }
   },
   activator

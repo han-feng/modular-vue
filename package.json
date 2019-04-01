@@ -1,6 +1,6 @@
 {
   "name": "modular-vue",
-  "version": "0.5.2",
+  "version": "0.6.0",
   "description": "modular vue support",
   "author": "Han Feng <han_feng@foxmail.com>",
   "license": "MIT",
@@ -19,9 +19,11 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
+    "modular-core": "^0.6.0",
     "vue": "^2.6.10",
     "vue-router": "^3.0.2",
-    "vuex": "^3.1.0"
+    "vuex": "^3.1.0",
+    "vuex-along": "^1.2.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",

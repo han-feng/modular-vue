@@ -1,11 +1,11 @@
 import Vue from 'vue'
+import { createVuexAlong } from 'vuex-along'
 
-import vuexAlong from './vuex-along'
 import router from './router'
 import store from './store'
 
-// router.event 白名单
-const EVENT_KEYS = Object.freeze({
+// router.hook 白名单
+const HOOK_KEYS = Object.freeze({
   beforeEach: true,
   beforeResolve: true,
   afterEach: true,
@@ -14,15 +14,15 @@ const EVENT_KEYS = Object.freeze({
 })
 
 export default {
-
   start (moduleConfig) {
     const application = moduleConfig.getApplication()
-    vuexAlong.setKey(`vuexAlong:${application.name}-${application.version}`)
+    const vuexAlong = {}
+    vuexAlong.name = `vuexAlong:${application.name}-${application.version}`
 
-    // 处理 vuex.module
+    // 处理 vuex.modules
     const local = []
     const session = []
-    let configs = moduleConfig.getExtension('vuex.module')
+    let configs = moduleConfig.getExtension('vuex.modules')
     for (let key in configs) {
       const m = configs[key]
       store.registerModule(key, m)
@@ -35,18 +35,22 @@ export default {
       }
     }
     if (session.length > 0) {
-      vuexAlong.watchSession(session, true)
+      vuexAlong.session = {
+        list: session
+      }
     }
     if (local.length > 0) {
-      vuexAlong.watch(local, true)
+      vuexAlong.local = {
+        list: local
+      }
     } else {
-      vuexAlong.onlySession(true)
+      vuexAlong.justSession = true
     }
     // vuex.plugin 的安装方法
-    vuexAlong(store)
+    createVuexAlong(vuexAlong)(store)
 
-    // 处理 vue.plugin
-    configs = moduleConfig.getExtension('vue.plugin')
+    // 处理 vue.plugins
+    configs = moduleConfig.getExtension('vue.plugins')
     for (let key in configs) {
       Vue.use(configs[key])
     }
@@ -57,8 +61,8 @@ export default {
       options.push(configs[key])
     }
 
-    // 处理 vue.router.addRoutes
-    configs = moduleConfig.getExtension('vue.router.addRoutes')
+    // 处理 vue.router.routes
+    configs = moduleConfig.getExtension('vue.router.routes')
     const routes = []
     const parentRoutes = {}
     const unresolved = {}
@@ -113,13 +117,13 @@ export default {
     // 加入路由
     router.addRoutes(routes)
 
-    // 处理 vue.router.event
-    configs = moduleConfig.getExtension('vue.router.event')
+    // 处理 vue.router.hooks
+    configs = moduleConfig.getExtension('vue.router.hooks')
     for (let key in configs) {
       const config = configs[key]
-      for (let event in config) {
-        if (EVENT_KEYS[event]) {
-          router[event](config[event])
+      for (let hook in config) {
+        if (HOOK_KEYS[hook]) {
+          router[hook](config[hook])
         }
       }
     }
@@ -136,5 +140,4 @@ export default {
     new Vue(vueOptions).$mount('#app')
     // start end
   }
-
 }
