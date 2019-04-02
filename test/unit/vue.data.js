@@ -44,7 +44,9 @@ const testModule1 = {
       }
     },
     'vue.router.hooks': {
-      test1: {}
+      test1: {
+        beforeEach: () => {}
+      }
     },
     'vuex.modules': {
       test1: {
@@ -87,7 +89,9 @@ const testModule2 = {
       }
     },
     'vue.router.hooks': {
-      test2: {}
+      test2: {
+        test: () => {}
+      }
     },
     'vuex.modules': {
       test2: {
@@ -99,7 +103,7 @@ const testModule2 = {
 
 const testModule3 = {
   name: 'testModule3',
-  dependencies: ['vue', 'testModule4'],
+  dependencies: ['vue'],
   extensions: {
     'vue.plugins': {
       test3: {
@@ -136,9 +140,6 @@ const testModule3 = {
         parent: 'index3',
         routes: []
       }
-    },
-    'vue.router.hooks': {
-      test3: {}
     }
   }
 }
@@ -187,4 +188,67 @@ const testModule4 = {
   }
 }
 
-export const testModules = [testModule1, testModule2, testModule3, testModule4]
+const testModule5 = {
+  name: 'testModule5',
+  dependencies: ['vue'],
+  extensions: {
+    'vue.plugins': {
+      test5: {
+        install (Vue) {
+          Vue.$test5 = {
+            data: {
+              hello: 'testModule5'
+            }
+          }
+        }
+      }
+    },
+    'vue.router.routes': {
+      test5: {
+        parent: 'root'
+      }
+    },
+    'vuex.modules': {
+      test5: {
+        storage: 'test'
+      }
+    }
+  }
+}
+
+const testModule6 = {
+  name: 'testModule6',
+  dependencies: ['vue'],
+  extensions: {
+    'vue.plugins': {
+      test6: {
+        install (Vue) {
+          Vue.$test6 = {
+            data: {
+              hello: 'testModule6'
+            }
+          }
+        }
+      }
+    },
+    'vue.router.routes': {
+      test6: {
+        routes: [
+          {
+            name: 'index6',
+            path: '/6/',
+            component: {
+              name: 'index6'
+            },
+            children: []
+          }
+        ]
+      }
+    },
+    'vuex.modules': {
+      test6: {}
+    }
+  }
+}
+
+export const testModules = [testModule1, testModule2, testModule3, testModule4, testModule5, testModule6]

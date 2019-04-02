@@ -10,7 +10,8 @@ import { application, testModules } from './vue.data'
 describe('modular-vue 单元测试', () => {
   test.each([
     [1, 2],
-    [3, 4]
+    [3, 4],
+    [5, 6]
   ])('扩展点测试', (a, b) => {
     document.body.innerHTML = '<div id="app"></div>'
     const modular = new Modular(cloneDeep({

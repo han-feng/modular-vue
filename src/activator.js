@@ -96,7 +96,7 @@ export default {
           parent = routes
         } else {
           parent = parentRoutes[parentName]
-          if (!parent) {
+          if (parent === undefined) {
             // 暂存为未解决状态
             unresolved[parentName] = unresolved[parentName] || []
             parent = unresolved[parentName]
