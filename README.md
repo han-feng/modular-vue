@@ -12,13 +12,13 @@
 ![Bugs](https://sonarcloud.io/api/project_badges/measure?project=han-feng_modular-vue&metric=bugs)
 ![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=han-feng_modular-vue&metric=code_smells)
 ![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=han-feng_modular-vue&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=han-feng_modular-vue)
-[![Maintainability](https://api.codeclimate.com/v1/badges/81ee4ea8619795c3df9f/maintainability)](https://codeclimate.com/github/han-feng/modular-vue/maintainability)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/aaaecaba7c4c4b559741b37704ec8f82)](https://www.codacy.com/app/han-feng/modular-vue?utm_source=github.com&utm_medium=referral&utm_content=han-feng/modular-vue&utm_campaign=Badge_Grade)
+[![Maintainability](https://api.codeclimate.com/v1/badges/5c36ea4eca94c86b4a47/maintainability)](https://codeclimate.com/github/han-feng/modular-vue/maintainability)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/134a8fba89f04979b9802d1037c6c73e)](https://www.codacy.com/app/han-feng/modular-vue?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=han-feng/modular-vue&amp;utm_campaign=Badge_Grade)
 
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=han-feng_modular-vue&metric=coverage)](https://sonarcloud.io/dashboard?id=han-feng_modular-vue)
 [![codecov](https://codecov.io/gh/han-feng/modular-vue/branch/master/graph/badge.svg)](https://codecov.io/gh/han-feng/modular-vue)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/81ee4ea8619795c3df9f/test_coverage)](https://codeclimate.com/github/han-feng/modular-vue/test_coverage)
-[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/aaaecaba7c4c4b559741b37704ec8f82)](https://www.codacy.com/app/han-feng/modular-vue?utm_source=github.com&utm_medium=referral&utm_content=han-feng/modular-vue&utm_campaign=Badge_Coverage)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/5c36ea4eca94c86b4a47/test_coverage)](https://codeclimate.com/github/han-feng/modular-vue/test_coverage)
+[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/134a8fba89f04979b9802d1037c6c73e)](https://www.codacy.com/app/han-feng/modular-vue?utm_source=github.com&utm_medium=referral&utm_content=han-feng/modular-vue&utm_campaign=Badge_Coverage)
 
 基于 modular-vue 的 Vue 支持模块
 
