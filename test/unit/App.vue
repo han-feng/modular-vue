@@ -1,7 +1,5 @@
 <template>
-  <div id="app">
-    <router-view />
-  </div>
+  <div id="text">Hello, VueApp</div>
 </template>
 
 <script>

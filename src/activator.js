@@ -68,7 +68,7 @@ export default {
     const unresolved = {}
     function registerParentRoutes (route) {
       // 有 children 属性的路由才可以作为父路由注册
-      if (route.children && route.children.length) {
+      if (route.children !== undefined && Array.isArray(route.children)) {
         const name = route.name
         if (name === undefined || name === '') {
           console.log(`Error: 路由名称未定义，${JSON.stringify(route)}`)
