@@ -1,13 +1,15 @@
 /**
  * modular-vue 模块
  */
-import activator from './activator'
-import router from './router'
+import { ModuleConfig } from 'modular-core'
+
 import store from './store'
+import router from './router'
+import activator from './activator'
 
-export { router, store }
+export { store, router }
 
-export default {
+const config: ModuleConfig = {
   name: 'vue',
   extensionPoints: {
     'vue.app': {
@@ -31,3 +33,5 @@ export default {
   },
   activator
 }
+
+export default config

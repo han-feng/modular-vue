@@ -32,25 +32,13 @@ const sonarFile = fs.readFileSync(sonarPath, 'utf8')
 const sonarVersionRegex = /sonar\.projectVersion=(.*)/
 const match = sonarFile.match(sonarVersionRegex)
 if (!match) {
-  console.error(
-    chalk.red(
-      "sonar-project.properties file doesn't have a version number. Fix this and run again."
-    )
-  )
+  console.error(chalk.red('sonar-project.properties file doesn\'t have a version number. Fix this and run again.'))
   process.exit(1)
 }
 
 const oldSonarVersionString = match[0]
 const newSonarVersionString = `sonar.projectVersion=${version}`
 if (oldSonarVersionString !== newSonarVersionString) {
-  fs.writeFileSync(
-    sonarPath,
-    sonarFile.replace(oldSonarVersionString, newSonarVersionString),
-    'utf8'
-  )
-  console.log(
-    chalk.green(
-      `replace '${oldSonarVersionString}' -> '${newSonarVersionString}'`
-    )
-  )
+  fs.writeFileSync(sonarPath, sonarFile.replace(oldSonarVersionString, newSonarVersionString), 'utf8')
+  console.log(chalk.green(`replace '${oldSonarVersionString}' -> '${newSonarVersionString}'`))
 }

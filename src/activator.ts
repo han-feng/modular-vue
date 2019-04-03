@@ -1,11 +1,13 @@
 import Vue from 'vue'
+import { RouteConfig } from 'vue-router'
 import { createVuexAlong } from 'vuex-along'
+import { Activator } from 'modular-core'
 
 import router from './router'
 import store from './store'
 
 // router.hook 白名单
-const HOOK_KEYS = Object.freeze({
+const HOOK_KEYS: { [index: string]: boolean } = Object.freeze({
   beforeEach: true,
   beforeResolve: true,
   afterEach: true,
@@ -13,17 +15,17 @@ const HOOK_KEYS = Object.freeze({
   onError: true
 })
 
-export default {
+const activator: Activator = {
   start (moduleConfig) {
     const application = moduleConfig.getApplication()
-    const vuexAlong = {}
-    vuexAlong.name = `vuexAlong:${application.name}-${application.version}`
+    const vuexAlong: any = {}
+    vuexAlong.name = `VAS:${application.name}-${application.version}`
 
     // 处理 vuex.modules
     const local = []
     const session = []
     let configs = moduleConfig.getExtension('vuex.modules')
-    for (let key in configs) {
+    for (const key of Object.keys(configs)) {
       const m = configs[key]
       store.registerModule(key, m)
       if (m.storage) {
@@ -51,34 +53,36 @@ export default {
 
     // 处理 vue.plugins
     configs = moduleConfig.getExtension('vue.plugins')
-    for (let key in configs) {
+    for (const key of Object.keys(configs)) {
       Vue.use(configs[key])
     }
     // 处理 vue.options
     const options = []
     configs = moduleConfig.getExtension('vue.options')
-    for (let key in configs) {
+    for (const key of Object.keys(configs)) {
       options.push(configs[key])
     }
 
     // 处理 vue.router.routes
     configs = moduleConfig.getExtension('vue.router.routes')
-    const routes = []
-    const parentRoutes = {}
-    const unresolved = {}
-    function registerParentRoutes (route) {
+    const routes: RouteConfig[] = []
+    const parentRoutes: { [index: string]: RouteConfig[] } = {}
+    const unresolved: { [index: string]: RouteConfig[] } = {}
+    function registerParentRoutes (route: RouteConfig) {
       // 有 children 属性的路由才可以作为父路由注册
       if (route.children !== undefined && Array.isArray(route.children)) {
         const name = route.name
         if (name === undefined || name === '') {
+          // tslint:disable-next-line:no-console
           console.log(`Error: 路由名称未定义，${JSON.stringify(route)}`)
           return
         }
-        parentRoutes[name] = route.children
+        const children = route.children
+        parentRoutes[name] = children
         if (unresolved[name]) {
           // 加入后将未解决的该名称下子路由拷贝过来
           unresolved[name].forEach(item => {
-            route.children.push(item)
+            children.push(item)
           })
           delete unresolved[name]
         }
@@ -87,8 +91,8 @@ export default {
         })
       }
     }
-    for (const key in configs) {
-      const config = configs[key]
+    for (const key of Object.keys(configs)) {
+      const config: { parent: string; routes: RouteConfig[] } = configs[key]
       if (config && config.parent && config.routes) {
         const parentName = config.parent
         let parent
@@ -109,8 +113,9 @@ export default {
         })
       }
     }
-    for (const key in unresolved) {
+    for (const key of Object.keys(unresolved)) {
       // TODO 完善日志机制
+      // tslint:disable-next-line:no-console
       console.log(`Error: 父路由“${key}”不存在`)
     }
 
@@ -119,25 +124,25 @@ export default {
 
     // 处理 vue.router.hooks
     configs = moduleConfig.getExtension('vue.router.hooks')
-    for (let key in configs) {
+    for (const key of Object.keys(configs)) {
       const config = configs[key]
-      for (let hook in config) {
+      for (const hook in config) {
         if (HOOK_KEYS[hook]) {
-          router[hook](config[hook])
+          (router as any)[hook](config[hook])
         }
       }
     }
 
     // 处理 vue.app
     const app = moduleConfig.getExtension('vue.app')
-    const vueOptions = {
+    new Vue({
       router,
       store,
       mixins: options,
       render: h => h(app.component)
-    }
-
-    new Vue(vueOptions).$mount('#app')
+    }).$mount('#app')
     // start end
   }
 }
+
+export default activator

@@ -5,6 +5,7 @@
   "author": "Han Feng <han_feng@foxmail.com>",
   "license": "MIT",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
@@ -13,10 +14,10 @@
     "url": "git+https://github.com/han-feng/modular-vue.git"
   },
   "scripts": {
-    "build": "babel src --out-dir dist",
-    "lint": "eslint *.js",
+    "build": "tsc",
+    "lint": "tslint -p tsconfig.json --fix",
     "test": "jest",
-    "prebuild": "rimraf dist/* && node script/sync-version.js",
+    "prebuild": "rimraf dist/* && node script/fix-bugs.js && node script/sync-version.js",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
@@ -27,21 +28,18 @@
     "vuex-along": "^1.2.3"
   },
   "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.4.0",
-    "@babel/preset-env": "^7.4.2",
-    "@vue/eslint-config-standard": "^4.0.0",
+    "@babel/preset-env": "^7.4.3",
+    "@types/jest": "^24.0.11",
+    "@types/lodash": "^4.14.123",
     "@vue/test-utils": "^1.0.0-beta.29",
     "babel-core": "^7.0.0-bridge.0",
-    "babel-eslint": "^10.0.1",
-    "babel-jest": "^24.6.0",
+    "babel-jest": "^24.7.0",
     "chalk": "^2.4.2",
-    "eslint": "^5.16.0",
-    "eslint-plugin-vue": "^5.2.2",
-    "jest": "^24.6.0",
+    "jest": "^24.7.0",
     "lodash": "^4.17.11",
     "rimraf": "^2.6.3",
     "ts-jest": "^24.0.1",
+    "tslint": "^5.15.0",
     "typescript": "^3.4.1",
     "vue-jest": "^3.0.4",
     "vue-template-compiler": "^2.6.10"
@@ -50,18 +48,5 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ],
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "@vue/standard"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
-  }
+  ]
 }
