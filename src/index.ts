@@ -1,37 +1,38 @@
 /**
  * modular-vue 模块
  */
-import { ModuleConfig } from 'modular-core'
+import { ModuleConfig, ExtensionPointType } from 'modular-core'
 
 import store from './store'
 import router from './router'
 import activator from './activator'
 
-export { store, router }
+const { Single, Mixin, Multiple } = ExtensionPointType
 
 const config: ModuleConfig = {
   name: 'vue',
   extensionPoints: {
     'vue.app': {
-      type: 'mixin'
+      type: Single
     },
     'vue.plugins': {
-      type: 'array'
+      type: Multiple
     },
     'vue.options': {
-      type: 'array'
+      type: Multiple
     },
     'vue.router.routes': {
-      type: 'array'
+      type: Multiple
     },
     'vue.router.hooks': {
-      type: 'array' // or mixin ?
+      type: Multiple
     },
     'vuex.modules': {
-      type: 'array'
+      type: Mixin
     }
   },
   activator
 }
 
+export { store, router }
 export default config

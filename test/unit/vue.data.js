@@ -15,38 +15,37 @@ const testModule1 = {
   dependencies: ['vue'],
   extensions: {
     'vue.plugins': {
-      test1: {
-        install (Vue) {
-          Vue.$test1 = {
-            data: {
-              hello: 'testModule1'
-            }
+      install(Vue) {
+        Vue.$test1 = {
+          data: {
+            hello: 'testModule1'
           }
         }
       }
     },
     'vue.options': {
-      test1: {}
+      created() {
+        this.$created1 = 'test1'
+      },
+      mounted() {
+        this.$mounted1 = 'test1'
+      }
     },
     'vue.router.routes': {
-      test1: {
-        parent: 'root',
-        routes: [
-          {
-            name: 'index',
-            path: '/',
-            component: {
-              name: 'index'
-            },
-            children: []
-          }
-        ]
-      }
+      parent: 'root',
+      routes: [
+        {
+          name: 'index',
+          path: '/',
+          component: {
+            name: 'index'
+          },
+          children: []
+        }
+      ]
     },
     'vue.router.hooks': {
-      test1: {
-        beforeEach: () => {}
-      }
+      beforeEach: () => {}
     },
     'vuex.modules': {
       test1: {
@@ -61,37 +60,36 @@ const testModule2 = {
   dependencies: ['vue', 'testModule1'],
   extensions: {
     'vue.plugins': {
-      test2: {
-        install (Vue) {
-          Vue.$test2 = {
-            data: {
-              hello: 'testModule2'
-            }
+      install(Vue) {
+        Vue.$test2 = {
+          data: {
+            hello: 'testModule2'
           }
         }
       }
     },
     'vue.options': {
-      test2: {}
+      created() {
+        this.$created2 = 'test2'
+      },
+      mounted() {
+        this.$mounted2 = 'test2'
+      }
     },
     'vue.router.routes': {
-      test2: {
-        parent: 'index',
-        routes: [
-          {
-            name: 'test',
-            path: 'test',
-            component: {
-              name: 'test'
-            }
+      parent: 'index',
+      routes: [
+        {
+          name: 'test',
+          path: 'test',
+          component: {
+            name: 'test'
           }
-        ]
-      }
+        }
+      ]
     },
     'vue.router.hooks': {
-      test2: {
-        test: () => {}
-      }
+      test: () => {}
     },
     'vuex.modules': {
       test2: {
@@ -106,21 +104,24 @@ const testModule3 = {
   dependencies: ['vue'],
   extensions: {
     'vue.plugins': {
-      test3: {
-        install (Vue) {
-          Vue.$test3 = {
-            data: {
-              hello: 'testModule3'
-            }
+      install(Vue) {
+        Vue.$test3 = {
+          data: {
+            hello: 'testModule3'
           }
         }
       }
     },
     'vue.options': {
-      test3: {}
+      created() {
+        this.$created3 = 'test3'
+      },
+      mounted() {
+        this.$mounted3 = 'test3'
+      }
     },
-    'vue.router.routes': {
-      test3: {
+    'vue.router.routes': [
+      {
         parent: 'index4',
         routes: [
           {
@@ -136,11 +137,11 @@ const testModule3 = {
           }
         ]
       },
-      test31: {
+      {
         parent: 'index3',
         routes: []
       }
-    }
+    ]
   }
 }
 
@@ -149,37 +150,36 @@ const testModule4 = {
   dependencies: ['vue'],
   extensions: {
     'vue.plugins': {
-      test1: {
-        install (Vue) {
-          Vue.$test4 = {
-            data: {
-              hello: 'testModule4'
-            }
+      install(Vue) {
+        Vue.$test4 = {
+          data: {
+            hello: 'testModule4'
           }
         }
       }
     },
     'vue.options': {
-      test4: {}
-    },
-    'vue.router.routes': {
-      test4: {
-        parent: 'root',
-        routes: [
-          {
-            name: 'index4',
-            path: '/4/',
-            component: {
-              name: 'index4'
-            },
-            children: []
-          }
-        ]
+      created() {
+        this.$created4 = 'test4'
+      },
+      mounted() {
+        this.$mounted4 = 'test4'
       }
     },
-    'vue.router.hooks': {
-      test4: {}
+    'vue.router.routes': {
+      parent: 'root',
+      routes: [
+        {
+          name: 'index4',
+          path: '/4/',
+          component: {
+            name: 'index4'
+          },
+          children: []
+        }
+      ]
     },
+    'vue.router.hooks': {},
     'vuex.modules': {
       test4: {
         storage: 'session'
@@ -193,20 +193,16 @@ const testModule5 = {
   dependencies: ['vue'],
   extensions: {
     'vue.plugins': {
-      test5: {
-        install (Vue) {
-          Vue.$test5 = {
-            data: {
-              hello: 'testModule5'
-            }
+      install(Vue) {
+        Vue.$test5 = {
+          data: {
+            hello: 'testModule5'
           }
         }
       }
     },
     'vue.router.routes': {
-      test5: {
-        parent: 'root'
-      }
+      parent: 'root'
     },
     'vuex.modules': {
       test5: {
@@ -221,29 +217,25 @@ const testModule6 = {
   dependencies: ['vue'],
   extensions: {
     'vue.plugins': {
-      test6: {
-        install (Vue) {
-          Vue.$test6 = {
-            data: {
-              hello: 'testModule6'
-            }
+      install(Vue) {
+        Vue.$test6 = {
+          data: {
+            hello: 'testModule6'
           }
         }
       }
     },
     'vue.router.routes': {
-      test6: {
-        routes: [
-          {
-            name: 'index6',
-            path: '/6/',
-            component: {
-              name: 'index6'
-            },
-            children: []
-          }
-        ]
-      }
+      routes: [
+        {
+          name: 'index6',
+          path: '/6/',
+          component: {
+            name: 'index6'
+          },
+          children: []
+        }
+      ]
     },
     'vuex.modules': {
       test6: {}
@@ -251,4 +243,11 @@ const testModule6 = {
   }
 }
 
-export const testModules = [testModule1, testModule2, testModule3, testModule4, testModule5, testModule6]
+export const testModules = [
+  testModule1,
+  testModule2,
+  testModule3,
+  testModule4,
+  testModule5,
+  testModule6
+]

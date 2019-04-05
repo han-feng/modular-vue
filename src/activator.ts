@@ -16,17 +16,17 @@ const HOOK_KEYS: { [index: string]: boolean } = Object.freeze({
 })
 
 const activator: Activator = {
-  start (moduleConfig) {
-    const application = moduleConfig.getApplication()
+  start(modular) {
+    const application = modular.getApplication()
     const vuexAlong: any = {}
     vuexAlong.name = `VAS:${application.name}-${application.version}`
 
     // 处理 vuex.modules
     const local = []
     const session = []
-    let configs = moduleConfig.getExtension('vuex.modules')
-    for (const key of Object.keys(configs)) {
-      const m = configs[key]
+    const vuexModules = modular.getExtension('vuex.modules')
+    for (const key of Object.keys(vuexModules)) {
+      const m = vuexModules[key]
       store.registerModule(key, m)
       if (m.storage) {
         if (m.storage === 'session') {
@@ -52,23 +52,23 @@ const activator: Activator = {
     createVuexAlong(vuexAlong)(store)
 
     // 处理 vue.plugins
-    configs = moduleConfig.getExtension('vue.plugins')
-    for (const key of Object.keys(configs)) {
-      Vue.use(configs[key])
-    }
-    // 处理 vue.options
-    const options = []
-    configs = moduleConfig.getExtension('vue.options')
-    for (const key of Object.keys(configs)) {
-      options.push(configs[key])
+    const vuePlugins = modular.getExtensions('vue.plugins')
+    if (vuePlugins !== null) {
+      vuePlugins.forEach(plugin => Vue.use(plugin))
     }
 
+    // 处理 vue.options
+    const vueOptions = modular.getExtensions('vue.options') || []
+
     // 处理 vue.router.routes
-    configs = moduleConfig.getExtension('vue.router.routes')
+    const routerConfigs: Array<{
+      parent: string
+      routes: RouteConfig[]
+    }> = modular.getExtension('vue.router.routes')
     const routes: RouteConfig[] = []
     const parentRoutes: { [index: string]: RouteConfig[] } = {}
     const unresolved: { [index: string]: RouteConfig[] } = {}
-    function registerParentRoutes (route: RouteConfig) {
+    function registerParentRoutes(route: RouteConfig) {
       // 有 children 属性的路由才可以作为父路由注册
       if (route.children !== undefined && Array.isArray(route.children)) {
         const name = route.name
@@ -91,56 +91,64 @@ const activator: Activator = {
         })
       }
     }
-    for (const key of Object.keys(configs)) {
-      const config: { parent: string; routes: RouteConfig[] } = configs[key]
-      if (config && config.parent && config.routes) {
-        const parentName = config.parent
-        let parent
-        if (parentName === 'root') {
-          parent = routes
-        } else {
-          parent = parentRoutes[parentName]
-          if (parent === undefined) {
-            // 暂存为未解决状态
-            unresolved[parentName] = unresolved[parentName] || []
-            parent = unresolved[parentName]
-          }
-        }
-        config.routes.forEach(item => {
-          // TODO 此处可以加入路由配置规则校验：路由名称未定义、路由缓存开启条件不满足……
-          parent.push(item)
-          registerParentRoutes(item)
-        })
-      }
-    }
-    for (const key of Object.keys(unresolved)) {
-      // TODO 完善日志机制
-      // tslint:disable-next-line:no-console
-      console.log(`Error: 父路由“${key}”不存在`)
-    }
 
-    // 加入路由
-    router.addRoutes(routes)
+    if (routerConfigs !== null) {
+      routerConfigs.forEach(config => {
+        if (config && config.parent && config.routes) {
+          const parentName = config.parent
+          let parent
+          if (parentName === 'root') {
+            parent = routes
+          } else {
+            parent = parentRoutes[parentName]
+            if (parent === undefined) {
+              // 暂存为未解决状态
+              unresolved[parentName] = unresolved[parentName] || []
+              parent = unresolved[parentName]
+            }
+          }
+          config.routes.forEach(item => {
+            // TODO 此处可以加入路由配置规则校验：路由名称未定义、路由缓存开启条件不满足……
+            parent.push(item)
+            registerParentRoutes(item)
+          })
+        }
+      })
+
+      for (const key of Object.keys(unresolved)) {
+        // TODO 完善日志机制
+        // tslint:disable-next-line:no-console
+        console.log(`Error: 父路由“${key}”不存在`)
+      }
+
+      // 加入路由
+      router.addRoutes(routes)
+    }
 
     // 处理 vue.router.hooks
-    configs = moduleConfig.getExtension('vue.router.hooks')
-    for (const key of Object.keys(configs)) {
-      const config = configs[key]
-      for (const hook in config) {
-        if (HOOK_KEYS[hook]) {
-          (router as any)[hook](config[hook])
+    const hooks = modular.getExtensions('vue.router.hooks')
+    if (hooks !== null) {
+      const register = (router as any)
+      hooks.forEach(config => {
+        for (const hook in config) {
+          if (HOOK_KEYS[hook] !== undefined) {
+            register[hook](config[hook])
+          }
         }
-      }
+      })
     }
 
     // 处理 vue.app
-    const app = moduleConfig.getExtension('vue.app')
-    new Vue({
+    const app = modular.getExtension('vue.app')
+
+    const vm = new Vue({
       router,
       store,
-      mixins: options,
+      mixins: vueOptions,
       render: h => h(app.component)
     }).$mount('#app')
+
+    modular.setAttribute('vue.instance', vm)
     // start end
   }
 }
