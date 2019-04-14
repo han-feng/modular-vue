@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import { RouteConfig } from 'vue-router'
-import { createVuexAlong } from 'vuex-along'
+import createVuexAlong from 'vuex-along'
 import { Activator } from 'modular-core'
 
 import router from './router'

@@ -1,6 +1,6 @@
 {
   "name": "modular-vue",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "description": "modular vue support",
   "author": "Han Feng <han_feng@foxmail.com>",
   "license": "MIT",
@@ -23,9 +23,9 @@
   "dependencies": {
     "modular-core": "^0.6.4",
     "vue": "^2.6.10",
-    "vue-router": "^3.0.2",
+    "vue-router": "^3.0.4",
     "vuex": "^3.1.0",
-    "vuex-along": "^1.2.3"
+    "vuex-along": "^1.2.4"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.4.3",
@@ -40,7 +40,7 @@
     "rimraf": "^2.6.3",
     "ts-jest": "^24.0.2",
     "tslint": "^5.15.0",
-    "typescript": "^3.4.2",
+    "typescript": "^3.4.3",
     "vue-jest": "^3.0.4",
     "vue-template-compiler": "^2.6.10"
   },
