@@ -1,8 +1,10 @@
-import App from './App'
+// tslint:disable:no-empty
+import { ModuleConfig, ApplicationConfig } from 'modular-core'
+import App from './App.vue'
 
-export const application = {
-  name: process.env.VUE_APP_NAME,
-  version: process.env.VUE_APP_VERSION,
+export const application: ApplicationConfig = {
+  name: 'application',
+  version: '0',
   extensions: {
     'vue.app': {
       component: App
@@ -10,12 +12,17 @@ export const application = {
   }
 }
 
-const testModule1 = {
+export const application2: ApplicationConfig = {
+  name: process.env.VUE_APP_NAME || 'application',
+  version: process.env.VUE_APP_VERSION
+}
+
+const testModule1: ModuleConfig = {
   name: 'testModule1',
   dependencies: ['vue'],
   extensions: {
     'vue.plugins': {
-      install(Vue) {
+      install(Vue: any) {
         Vue.$test1 = {
           data: {
             hello: 'testModule1'
@@ -49,18 +56,27 @@ const testModule1 = {
     },
     'vuex.modules': {
       test1: {
-        storage: 'session'
+        storage: 'session',
+        namespaced: true,
+        state: {
+          name : 'vuexTest'
+        },
+        mutations: {
+          setName (state: any, name: string) {
+            state.name = name
+          }
+        }
       }
     }
   }
 }
 
-const testModule2 = {
+const testModule2: ModuleConfig = {
   name: 'testModule2',
   dependencies: ['vue', 'testModule1'],
   extensions: {
     'vue.plugins': {
-      install(Vue) {
+      install(Vue: any) {
         Vue.$test2 = {
           data: {
             hello: 'testModule2'
@@ -99,12 +115,12 @@ const testModule2 = {
   }
 }
 
-const testModule3 = {
+const testModule3: ModuleConfig = {
   name: 'testModule3',
   dependencies: ['vue'],
   extensions: {
     'vue.plugins': {
-      install(Vue) {
+      install(Vue: any) {
         Vue.$test3 = {
           data: {
             hello: 'testModule3'
@@ -145,12 +161,12 @@ const testModule3 = {
   }
 }
 
-const testModule4 = {
+const testModule4: ModuleConfig = {
   name: 'testModule4',
   dependencies: ['vue'],
   extensions: {
     'vue.plugins': {
-      install(Vue) {
+      install(Vue: any) {
         Vue.$test4 = {
           data: {
             hello: 'testModule4'
@@ -188,12 +204,12 @@ const testModule4 = {
   }
 }
 
-const testModule5 = {
+const testModule5: ModuleConfig = {
   name: 'testModule5',
   dependencies: ['vue'],
   extensions: {
     'vue.plugins': {
-      install(Vue) {
+      install(Vue: any) {
         Vue.$test5 = {
           data: {
             hello: 'testModule5'
@@ -212,12 +228,12 @@ const testModule5 = {
   }
 }
 
-const testModule6 = {
+const testModule6: ModuleConfig = {
   name: 'testModule6',
   dependencies: ['vue'],
   extensions: {
     'vue.plugins': {
-      install(Vue) {
+      install(Vue: any) {
         Vue.$test6 = {
           data: {
             hello: 'testModule6'

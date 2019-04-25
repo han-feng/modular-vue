@@ -24,7 +24,7 @@
   "dependencies": {
     "modular-core": "^0.6.5",
     "vue": "^2.6.10",
-    "vue-router": "^3.0.5",
+    "vue-router": "^3.0.6",
     "vuex": "^3.1.0",
     "vuex-along": "^1.2.4"
   },
@@ -32,13 +32,14 @@
     "@babel/preset-env": "^7.4.3",
     "@types/jest": "^24.0.11",
     "@types/lodash": "^4.14.123",
+    "@types/node": "^11.13.7",
     "@vue/test-utils": "^1.0.0-beta.29",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^24.7.1",
     "chalk": "^2.4.2",
     "del": "^4.1.0",
     "dotgitignore": "^2.1.0",
-    "gulp": "^4.0.0",
+    "gulp": "^4.0.1",
     "gulp-filter": "^5.1.0",
     "gulp-if": "^2.0.2",
     "gulp-license": "^1.1.0",
@@ -50,10 +51,9 @@
     "jest": "^24.7.1",
     "lodash": "^4.17.11",
     "pump": "^3.0.0",
-    "rimraf": "^2.6.3",
     "ts-jest": "^24.0.2",
     "tslint": "^5.16.0",
-    "typescript": "^3.4.3",
+    "typescript": "^3.4.5",
     "vue-jest": "^3.0.4",
     "vue-template-compiler": "^2.6.10"
   }
