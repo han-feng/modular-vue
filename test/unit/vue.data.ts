@@ -4,7 +4,7 @@ import App from './App.vue'
 
 export const application: ApplicationConfig = {
   name: 'application',
-  version: '0',
+  version: '0.1.2-test',
   extensions: {
     'vue.app': {
       component: App
