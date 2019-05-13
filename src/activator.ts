@@ -51,7 +51,7 @@ function addVuexModules(modular: Modular) {
 }
 
 function addPlugins(modular: Modular) {
-  const vuePlugins = modular.getExtensions('vue.plugins')
+  const vuePlugins = modular.getExtension('vue.plugins') as any[]
   if (vuePlugins !== null) {
     vuePlugins.forEach(plugin => Vue.use(plugin))
   }
@@ -123,7 +123,7 @@ function addRoutes(modular: Modular) {
 }
 
 function addRouterHooks(modular: Modular) {
-  const hooks = modular.getExtensions('vue.router.hooks')
+  const hooks = modular.getExtension('vue.router.hooks') as any[]
   if (hooks !== null) {
     const register: any = router
     hooks.forEach(config => {
@@ -146,7 +146,7 @@ function createVueInstance(modular: Modular) {
       render: (h: any) => h(component)
     }
     // 处理 vue.options
-    const vueOptions = modular.getExtensions('vue.options')
+    const vueOptions = modular.getExtension('vue.options')
     if (vueOptions !== null) {
       options.mixins = vueOptions
     }
