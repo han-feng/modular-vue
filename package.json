@@ -1,8 +1,8 @@
 {
   "name": "modular-vue",
-  "version": "1.1.0",
+  "version": "1.2.0-SNAPSHOT",
   "description": "modular vue support",
-  "author": "Han Feng <han_feng@foxmail.com>",
+  "author": "han_feng@foxmail.com",
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -28,7 +28,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "modular-core": "^1.1.0",
+    "modular-core": "^1.2.0",
     "vue": "^2.6.10",
     "vue-router": "^3.0.6",
     "vuex": "^3.1.1",
@@ -36,9 +36,9 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.4.4",
-    "@types/jest": "^24.0.12",
-    "@types/lodash": "^4.14.126",
-    "@types/node": "^12.0.0",
+    "@types/jest": "^24.0.13",
+    "@types/lodash": "^4.14.129",
+    "@types/node": "^12.0.2",
     "@vue/test-utils": "^1.0.0-beta.29",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^24.8.0",
