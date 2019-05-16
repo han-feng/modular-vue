@@ -15,6 +15,9 @@ const HOOK_KEYS: { [index: string]: boolean } = Object.freeze({
   onError: true
 })
 
+const defaultAppComponent = { name: 'app', render: (h: any) => h('router-view') }
+const defaultAppElement = '#app'
+
 function addVuexModules(modular: Modular) {
   const application = modular.getApplication()
   const vuexAlong: any = {
@@ -137,23 +140,26 @@ function addRouterHooks(modular: Modular) {
 }
 
 function createVueInstance(modular: Modular) {
-    // 处理 vue.app
-    const app = modular.getExtension('vue.app')
-    const component = app.component || { name: 'app', render: (h: any) => h('router-view') }
-    const options: any = {
-      router,
-      store,
-      render: (h: any) => h(component)
-    }
-    // 处理 vue.options
-    const vueOptions = modular.getExtension('vue.options')
-    if (vueOptions !== null) {
-      options.mixins = vueOptions
-    }
-    const vm = new Vue(options)
-    const element: string = app.element || '#app'
-    vm.$mount(element)
-    modular.setAttribute('vue.instance', vm)
+  // 处理 vue.app
+  let app = modular.getExtension('vue.app')
+  if (app === undefined) {
+    app = { component: defaultAppComponent, element: defaultAppElement }
+  }
+  const component = app.component || defaultAppComponent
+  const options: any = {
+    router,
+    store,
+    render: (h: any) => h(component)
+  }
+  // 处理 vue.options
+  const vueOptions = modular.getExtension('vue.options')
+  if (vueOptions !== null) {
+    options.mixins = vueOptions
+  }
+  const vm = new Vue(options)
+  const element: string = app.element || defaultAppElement
+  vm.$mount(element)
+  modular.setAttribute('vue.instance', vm)
 }
 
 const activator: Activator = {
