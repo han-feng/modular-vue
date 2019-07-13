@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/han-feng/modular-vue.svg?branch=master)](https://travis-ci.org/han-feng/modular-vue)
 ![GitHub package version](https://img.shields.io/github/package-json/v/han-feng/modular-vue.svg)
-[![npm](https://img.shields.io/npm/v/modular-vue.svg)](https://www.npmjs.com/package/modular-vue)
+[![npm](https://img.shields.io/npm/v/modular-vue.svg)](https://npm.im/modular-vue)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=han-feng_modular-vue&metric=ncloc)](https://sonarcloud.io/dashboard?id=han-feng_modular-vue)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/han-feng/modular-vue.svg)
 ![GitHub language count](https://img.shields.io/github/languages/count/han-feng/modular-vue.svg)
