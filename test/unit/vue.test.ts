@@ -67,12 +67,12 @@ describe('modular-vue 单元测试', () => {
 
       const { localStorage, sessionStorage } = window
       expect(JSON.parse(localStorage.getItem(VAS_NAME))).toEqual({
-        '9Q0+jSID7l0kTaDhykUEbA': {
+        root: {
           test2: {}
         }
       })
       expect(JSON.parse(sessionStorage.getItem(VAS_NAME))).toEqual({
-        '9Q0+jSID7l0kTaDhykUEbA': {
+        root: {
           test1: {
             name: 'vuexTest2'
           }

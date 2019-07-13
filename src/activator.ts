@@ -141,10 +141,8 @@ function addRouterHooks(modular: Modular) {
 
 function createVueInstance(modular: Modular) {
   // 处理 vue.app
-  let app = modular.getExtension('vue.app')
-  if (app === undefined) {
-    app = { component: defaultAppComponent, element: defaultAppElement }
-  }
+  const app = modular.getExtension('vue.app')
+    || { component: defaultAppComponent, element: defaultAppElement }
   const component = app.component || defaultAppComponent
   const options: any = {
     router,
