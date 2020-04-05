@@ -17,9 +17,7 @@ module.exports = {
     '^.+\\.tsx?$': 'ts-jest',
     '^.+\\.jsx?$': 'babel-jest'
   },
-  transformIgnorePatterns: [
-    '<rootDir>/node_modules/(?!(modular-core|vuex-along))'
-  ],
+  transformIgnorePatterns: [],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1'
   },

@@ -61,10 +61,10 @@ function addPlugins(modular: Modular) {
 }
 
 function addRoutes(modular: Modular) {
-  const routerConfigs: Array<{
+  const routerConfigs: {
     parent: string
     routes: RouteConfig[]
-  }> = modular.getExtension('vue.router.routes')
+  }[] = modular.getExtension('vue.router.routes')
   const routes: RouteConfig[] = []
   const parentRoutes: { [index: string]: RouteConfig[] } = {}
   const unresolved: { [index: string]: RouteConfig[] } = {}
