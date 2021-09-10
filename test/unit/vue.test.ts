@@ -1,3 +1,4 @@
+import Logger from 'js-logger'
 import Modular from 'modular-core'
 import Vue from 'vue'
 import { cloneDeep } from 'lodash'
@@ -6,6 +7,9 @@ import vueModule from '@/index'
 import store from '@/store'
 
 import { application, application2, testModules } from './vue.data'
+
+// Logger.useDefaults()
+const logger = Logger.get('modular.vue.test')
 
 const VAS_NAME = `VAS:${application.name}-${application.version}`
 

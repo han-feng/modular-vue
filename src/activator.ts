@@ -1,3 +1,4 @@
+import Logger from 'js-logger'
 import Vue from 'vue'
 import { RouteConfig } from 'vue-router'
 import createVuexAlong from 'vuex-along'
@@ -5,6 +6,8 @@ import Modular, { Activator, ModuleConfig } from 'modular-core'
 
 import router from './router'
 import store from './store'
+
+const logger = Logger.get('modular.vue.activator')
 
 // router.hook 白名单
 const HOOK_KEYS: { [index: string]: boolean } = Object.freeze({
@@ -73,8 +76,7 @@ function addRoutes(modular: Modular) {
     if (route.children !== undefined && Array.isArray(route.children)) {
       const name = route.name
       if (name === undefined || name === '') {
-        // tslint:disable-next-line:no-console
-        console.log(`Error: 路由名称未定义，${JSON.stringify(route)}`)
+        logger.error(`Error: 路由名称未定义，${JSON.stringify(route)}`)
         return
       }
       const children = route.children
@@ -115,9 +117,7 @@ function addRoutes(modular: Modular) {
       }
     })
     for (const key of Object.keys(unresolved)) {
-      // TODO 完善日志机制
-      // tslint:disable-next-line:no-console
-      console.log(`Error: 父路由“${key}”不存在`)
+      logger.error(`Error: 父路由“${key}”不存在`)
     }
     // 加入路由
     router.addRoutes(routes)
